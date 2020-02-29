@@ -2,10 +2,13 @@ node{
   stage('git checkout'){
     git credentialsId: 'GITCredential', url: 'https://github.com/RSI1982/netcore-boilerplate.git'
   }
-  stage('project build'){
+  stage('project restore'){
     sh label: '', script: 'dotnet restore src/HappyCode.NetCoreBoilerplate.Core/HappyCode.NetCoreBoilerplate.Core.csproj'
   }
   stage('project test'){
     sh label: '', script: 'dotnet test test/HappyCode.NetCoreBoilerplate.Core.UnitTests/HappyCode.NetCoreBoilerplate.Core.UnitTests.csproj'
+  }
+    stage('project build'){
+    sh label: '', script: 'dotnet build src/HappyCode.NetCoreBoilerplate.Core/HappyCode.NetCoreBoilerplate.Core.csproj'
   }
 }
