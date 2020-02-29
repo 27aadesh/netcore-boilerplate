@@ -5,4 +5,7 @@ node{
   stage('project build'){
     sh label: '', script: 'dotnet restore src/HappyCode.NetCoreBoilerplate.Core/HappyCode.NetCoreBoilerplate.Core.csproj'
   }
+  stage('project test'){
+    sh label: '', script: 'dotnet test test/HappyCode.NetCoreBoilerplate.Core.UnitTests/HappyCode.NetCoreBoilerplate.Core.UnitTests.csproj'
+  }
 }
