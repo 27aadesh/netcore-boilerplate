@@ -4,13 +4,13 @@ node{
   }
   stage('begain analysis'){
     def sqScannerMsBuildHome = tool name: 'SQ', type: 'hudson.plugins.sonar.MsBuildSQRunnerInstallation'
-    withSonarQubeEnv(credentialsId: '4b337e56-fea3-4226-a982-bdbfc2c0b68d', installationName: 'mssonarqube') {
+    withSonarQubeEnv(credentialsId: 'mssonarqube-token', installationName: 'mssonarqube'){
     // some block
-    sh label: '', script: 'dotnet $sqScannerMsBuildHome} begin /k:"Awesomekey" /d:sonar.host.url="http://40.68.188.150" /d:sonar.login="34c71aaff3b6c91867c07616e864c6c832da85c0"'
+    sh label: '', script: 'dotnet $sqScannerMsBuildHome} begin /k:"mssonarqube-key" /d:sonar.host.url="http://40.68.188.150" /d:sonar.login="1845109ac834681436787ff77d2660e3b8ba7ba8"'
     sh label: '', script: 'dotnet restore src/HappyCode.NetCoreBoilerplate.Core/HappyCode.NetCoreBoilerplate.Core.csproj'
     sh label: '', script: 'dotnet test test/HappyCode.NetCoreBoilerplate.Core.UnitTests/HappyCode.NetCoreBoilerplate.Core.UnitTests.csproj'
     sh label: '', script: 'dotnet build HappyCode.NetCoreBoilerplate.sln'
-    sh label: '', script: 'dotnet $sqScannerMsBuildHome} end /d:sonar.login="34c71aaff3b6c91867c07616e864c6c832da85c0"'
+    sh label: '', script: 'dotnet $sqScannerMsBuildHome} end /d:sonar.login="1845109ac834681436787ff77d2660e3b8ba7ba8"'
   }
   
  }
