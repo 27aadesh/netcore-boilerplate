@@ -3,16 +3,7 @@ node{
     git credentialsId: 'GITCredential', url: 'https://github.com/RSI1982/netcore-boilerplate.git'
   }
   stage('begain analysis'){
-    def sqScannerMsBuildHome = tool name: 'SQ', type: 'hudson.plugins.sonar.MsBuildSQRunnerInstallation'
-    withSonarQubeEnv(credentialsId: 'mssonarqube-token', installationName: 'mssonarqube'){
-    // some block
-    sh label: '', script: 'dotnet $sqScannerMsBuildHome} begin /k:"mssonarqube-key" /d:sonar.host.url="http://40.68.188.150" /d:sonar.login="1845109ac834681436787ff77d2660e3b8ba7ba8"'
-    sh label: '', script: 'dotnet restore src/HappyCode.NetCoreBoilerplate.Core/HappyCode.NetCoreBoilerplate.Core.csproj'
-    sh label: '', script: 'dotnet test test/HappyCode.NetCoreBoilerplate.Core.UnitTests/HappyCode.NetCoreBoilerplate.Core.UnitTests.csproj'
-    sh label: '', script: 'dotnet build HappyCode.NetCoreBoilerplate.sln'
-    sh label: '', script: 'dotnet $sqScannerMsBuildHome} end /d:sonar.login="1845109ac834681436787ff77d2660e3b8ba7ba8"'
+    sh label: '', script: 'dotnet sonarscanner begin /k:"mssonarqube-key" /d:sonar.host.url="http://40.68.188.150" /d:sonar.login="1845109ac834681436787ff77d2660e3b8ba7ba8"'
   }
-  
- }
   
 }
