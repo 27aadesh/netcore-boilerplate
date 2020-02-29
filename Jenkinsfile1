@@ -1,0 +1,5 @@
+node{
+  stage('git checkout'){
+    git credentialsId: 'GITCredential', url: 'https://github.com/RSI1982/netcore-boilerplate.git'
+  }
+}
