@@ -2,13 +2,20 @@ node{
   stage('git checkout'){
     git credentialsId: 'GITCredential', url: 'https://github.com/RSI1982/netcore-boilerplate.git'
   }
+  stage('sonarqube begain analysis'){
+    sh label: '', script: 'SonarScanner.MSBuild.exe begin /k:"Awesomekey" /d:sonar.host.url="http://40.68.188.150" /d:sonar.login="34c71aaff3b6c91867c07616e864c6c832da85c0"'
+  }
   stage('project restore'){
     sh label: '', script: 'dotnet restore src/HappyCode.NetCoreBoilerplate.Core/HappyCode.NetCoreBoilerplate.Core.csproj'
   }
   stage('project test'){
     sh label: '', script: 'dotnet test test/HappyCode.NetCoreBoilerplate.Core.UnitTests/HappyCode.NetCoreBoilerplate.Core.UnitTests.csproj'
   }
-    stage('project build'){
+   stage('project build'){
     sh label: '', script: 'dotnet build HappyCode.NetCoreBoilerplate.sln'
   }
+  stage('sonarqube end analysis'){
+    sh label: '', script: 'SonarScanner.MSBuild.exe end /d:sonar.login="34c71aaff3b6c91867c07616e864c6c832da85c0"'
+  }
+  
 }
