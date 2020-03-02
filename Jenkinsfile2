@@ -3,7 +3,11 @@ node{
     git credentialsId: 'GITCredential', url: 'https://github.com/RSI1982/netcore-boilerplate.git'
   }
   stage('begain analysis'){
-    sh label: '', script: 'dotnet sonarscanner begin /k:"mssonarqube-key" /d:sonar.host.url="http://40.68.188.150" /d:sonar.login="1845109ac834681436787ff77d2660e3b8ba7ba8"'
+    sh label: '', script: '''dotnet sonarscanner begin /k:"netcoreboilerplate" /d:sonar.host.url="http://168.63.25.91/" /d:sonar.login="4dd3213fda5ff826f330093f4a09e4cc1c8d4224"
+
+    dotnet build HappyCode.NetCoreBoilerplate.sln
+
+    dotnet sonarscanner end  /d:sonar.login="4dd3213fda5ff826f330093f4a09e4cc1c8d4224"
   }
   
 }
