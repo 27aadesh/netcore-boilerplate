@@ -1,0 +1,11 @@
+node{
+  stage('git checkout'){
+    git credentialsId: 'GITCredential', url: 'https://github.com/RSI1982/netcore-boilerplate.git'
+  }
+   stage('project build'){
+    sh label: '', script: 'dotnet build HappyCode.NetCoreBoilerplate.sln'
+  }
+  stage('artifactory store'){
+    nexusPublisher nexusInstanceId: 'nexus125', nexusRepositoryId: 'netcore-boilerplate', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'src/HappyCode.NetCoreBoilerplate.Api/bin/Debug/netcoreapp3.1/']], mavenCoordinate: [artifactId: 'apollo', groupId: 'Bayer', packaging: '*', version: '${BUILD_NUMBER}']]], tagName: 'dotnet'
+  }
+}
