@@ -6,6 +6,7 @@ node{
     sh label: '', script: 'dotnet build HappyCode.NetCoreBoilerplate.sln'
   }
   stage('artifactory store'){
-    nexusPublisher nexusInstanceId: 'nexus125', nexusRepositoryId: 'netcore-boilerplate', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'src/HappyCode.NetCoreBoilerplate.Core/bin/Debug/netstandard2.1/']], mavenCoordinate: [artifactId: 'apollo', groupId: 'Bayer', packaging: '*', version: '${BUILD_NUMBER}']]]
+    sh label: '', script: '''cd ${WORKSPACE}/*/src/HappyCode.NetCoreBoilerplate.Api/bin/Debug/netcoreapp3.1/
+    cp . http://104.47.146.170:8081/repository/nuget.org-proxy/'''
   }
 }
