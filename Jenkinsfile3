@@ -7,6 +7,6 @@ node{
   }
   stage('artifactory store'){
     sh label: '', script: 'cd ${WORKSPACE}/src/HappyCode.NetCoreBoilerplate.Api/bin/Debug/netcoreapp3.1'
-    sh label: '', script: 'cp ${WORKSPACE}/src/HappyCode.NetCoreBoilerplate.Api/bin/Debug/netcoreapp3.1 http://104.47.146.170:8081/repository/nuget.org-proxy/'
+    sh label: '', script: 'cp http://104.47.146.170:8081/repository/nuget.org-proxy/ .'
   }
 }
