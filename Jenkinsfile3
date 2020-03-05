@@ -6,7 +6,6 @@ node{
     sh label: '', script: 'dotnet build HappyCode.NetCoreBoilerplate.sln'
   }
   stage('artifactory store'){
-    sh label: '', script: 'cd ${WORKSPACE}'
-    sh label: '', script: 'cd /src/HappyCode.NetCoreBoilerplate.Api/bin/Debug/netcoreapp3.1/'
+    sh label: '', script: 'cd ${WORKSPACE}/src/HappyCode.NetCoreBoilerplate.Api/bin/Debug/netcoreapp3.1'
   }
 }
