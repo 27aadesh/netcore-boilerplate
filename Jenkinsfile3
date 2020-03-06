@@ -3,10 +3,10 @@ node{
     git credentialsId: 'GITCredential', url: 'https://github.com/RSI1982/netcore-boilerplate.git'
   }
    stage('project build'){
-    sh label: '', script: 'dotnet build HappyCode.NetCoreBoilerplate.sln'
+    sh label: '', script: 'dotnet build -o ${WORKSPACE}/target/ HappyCode.NetCoreBoilerplate.sln'
   }
   stage('artifactory store'){
-    sh label: '', script: '''cd ${WORKSPACE}/src/HappyCode.NetCoreBoilerplate.Core/bin/Debug/netstandard2.1/
+    sh label: '', script: '''cd ${WORKSPACE}/target/
     zip -r dotnetartifacts.zip .
     curl -v -u admin:admin123 --upload-file dotnetartifacts.zip  http://104.45.26.1:8081/repository/netcore-boilerplate/${BUILD_NUMBER}/'''
   }
