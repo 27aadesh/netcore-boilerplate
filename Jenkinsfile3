@@ -7,6 +7,6 @@ node{
   }
   stage('artifactory store'){
     sh label: '', script: 'cd ${WORKSPACE}/src/HappyCode.NetCoreBoilerplate.Core/bin/Debug/netstandard2.1/'
-    sh label: '', script: 'curl -v -u admin:admin123 --upload-file * http://104.45.26.1:8081/repository/nuget.org-proxy/'
+    sh label: '', script: 'curl -v -u admin:admin123 --upload-file * http://104.45.26.1:8081/repository/repository-example/'
   }
 }
