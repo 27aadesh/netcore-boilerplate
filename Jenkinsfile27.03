@@ -1,0 +1,32 @@
+node{
+    stage('SCM'){
+        git credentialsId: 'git_auth', url: 'https://github.com/RSI1982/netcore-boilerplate.git'
+    }
+    stage('dotnet build'){
+        sh label: '', script: 'dotnet build -o ${WORKSPACE}/target/ HappyCode.NetCoreBoilerplate.sln'
+    }
+    stage ('dotnet test'){
+        sh label: '', script: 'dotnet test  test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover'  
+    }
+    stage('sonarqube scanner for MS'){
+        sh label: '', script: '''dotnet /var/jenkins_home/tools/hudson.plugins.sonar.MsBuildSQRunnerInstallation/MSSQ/SonarScanner.MSBuild.dll begin /k:"netcore-boilerplate" /d:sonar.host.url="http://192.168.0.108:9000" /n:netcore-boilerplate /d:sonar.cs.opencover.reportsPaths="test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/coverage.opencover.xml" /d:sonar.login="326fb7895cdf2415adbb2640d721637bf3e7b7aa"
+        dotnet build -o ${WORKSPACE}/target/ HappyCode.NetCoreBoilerplate.sln
+        dotnet /var/jenkins_home/tools/hudson.plugins.sonar.MsBuildSQRunnerInstallation/MSSQ/SonarScanner.MSBuild.dll end /d:sonar.login="326fb7895cdf2415adbb2640d721637bf3e7b7aa"'''
+    }
+    stage('Verify Quality Gate'){
+        sleep(time:10,unit:"SECONDS")
+        sh label: '', script: '''response=$(curl http://192.168.0.108:9000/api/qualitygates/get_by_project?project=netcore-boilerplate)
+r=$(jq -n "$response" | jq .qualityGate.default)
+if [ "$r" = "true" ]; 
+then
+   echo "Quality Gate Passed"
+else
+    echo "Quality Gate not Passed"
+    exit 1
+fi'''
+    }
+    stage('mail notificatio'){
+        emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+Check console output at $BUILD_URL to view the results.''', recipientProviders: [brokenBuildSuspects(), developers(), requestor(), culprits()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'err.rakeshsingh@gmail.com'
+    }
+}
