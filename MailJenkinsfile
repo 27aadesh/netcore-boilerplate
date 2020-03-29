@@ -1,0 +1,40 @@
+node{try {
+	stage('SCM'){
+        git credentialsId: 'git_auth', url: 'https://github.com/RSI1982/my-app.git'
+    }
+    stage('maven buid'){
+        sh "mvn package"
+    }
+    stage('Nexus artifactory store'){
+        withCredentials([usernamePassword(credentialsId: 'Nexus_auth', passwordVariable: 'NEXUS_PASS', usernameVariable: 'NEXUS_USER')]) {
+    sh label: '', script: '''cd ${WORKSPACE}/target/
+        zip -r javabasedmyapp.zip .
+        curl -v -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file javabasedmyapp.zip http://192.168.0.7:8081/repository/javabasedmyapp-Pipeline/javabasedmyapp/${BUILD_NUMBER}'''
+}
+        
+    }
+    stage('sonarqube scanner maven'){
+        sh label: '', script: 'mvn sonar:sonar -Dsonar.projectKey=javabasedmyapp -Dsonar.host.url=http://192.168.0.7:9000 -Dsonar.login=ce00f038c6f659d50dae6f3a53868a499d6dd94d'
+    }
+    stage('Verify Quality Gate'){
+        sleep(time:15,unit:"SECONDS")
+        sh label: '', script: '''response=$(curl http://192.168.0.7:9000/api/qualitygates/project_status?projectKey=javabasedmyapp)
+r=$(jq -n "$response" | jq -r .projectStatus.status)
+if [ "$r" = OK ]; 
+then
+   echo "Quality Gate Passed"
+else
+    echo "Quality Gate not Passed"
+    exit 1
+fi'''
+    }
+}
+catch(e){stage('mail notification'){
+        emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - Failure!:
+Check console output at $BUILD_URL to view the results.''', recipientProviders: [brokenBuildSuspects(), developers(), requestor(), culprits()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - FAILURE!', to: 'err.rakeshsingh@gmail.com'
+    }
+    stage('build status'){
+        sh label: '', script: 'fail'
+    }
+}
+}
