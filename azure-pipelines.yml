@@ -17,7 +17,7 @@ steps:
   inputs:
     command: 'build'
     projects: 'HappyCode.NetCoreBoilerplate.sln'
-    arguments: '--output $(Build.ArtifactStagingDirectory)/target/'
+    arguments: '--output target/'
 
 - task: DotNetCoreCLI@2
   inputs:
