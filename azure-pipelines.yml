@@ -8,6 +8,11 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: 'HappyCode.NetCoreBoilerplate.sln'
+    feedsToUse: 'config'
+- task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
     command: 'build'
@@ -19,3 +24,8 @@ steps:
     command: 'test'
     projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
     arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage report'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
