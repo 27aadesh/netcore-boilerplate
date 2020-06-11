@@ -47,9 +47,8 @@ steps:
   inputs:
     SonarQube: 'bayerplatesonar'
     scannerMode: 'MSBuild'
-    projectKey: 'sonar.bayerplate'
-    projectName: 'sonar.bayerplate'
-    extraProperties: 'sonar.cs.vscoveragexml.reportsPaths=$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+    projectKey: 'bayerplate'
+    projectName: 'bayerplate'
 - task: SonarQubeAnalyze@4
 - task: SonarQubePublish@4
   inputs:
