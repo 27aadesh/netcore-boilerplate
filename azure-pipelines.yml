@@ -20,3 +20,8 @@ steps:
   inputs:
     command: 'test'
     projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: 'HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
+    pathToSources: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests'
