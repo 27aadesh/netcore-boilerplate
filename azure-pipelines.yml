@@ -11,4 +11,4 @@ steps:
   inputs:
     command: 'build'
     projects: 'HappyCode.NetCoreBoilerplate.sln'
-    arguments: '-o $(build.artifactstagingdirectory)\target'
+    arguments: '-o $(build.artifactstagingdirectory)/target/'
