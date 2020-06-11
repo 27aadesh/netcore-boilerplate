@@ -49,9 +49,9 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
-
-- task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
+- task: SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
-  continueOnError: true
-- task: SonarSource.sonarqube.291ed61f-1ee4-45d3-b1b0-bf822d9095ef.SonarQubePublish@4
+- task: SonarQubePublish@4
   displayName: 'Publish Quality Gate Result'
+  inputs:
+    pollingTimeoutSec: '300'
