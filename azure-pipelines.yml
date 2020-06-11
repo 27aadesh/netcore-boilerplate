@@ -20,4 +20,4 @@ steps:
     command: 'test'
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
     publishTestResults: true
-    projects: '**/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/*.csproj
+    projects: '**/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/*.csproj'
