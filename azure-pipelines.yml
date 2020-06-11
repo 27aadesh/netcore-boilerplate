@@ -9,20 +9,6 @@ pool:
 steps:
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-    feedsToUse: 'select'
-- task: DotNetCoreCLI@2
-  inputs:
     command: 'build'
-    projects: '**/*.csproj'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: '**/*Tests/*.csproj'
-    arguments: '--collect "Code coverage"'''
-    testRunTitle: '--configuration $(buildConfiguration) --collect "Code coverage'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
+    projects: 'HappyCode.NetCoreBoilerplate.sln'
+    arguments: '-o $(build.artifactstagingdirectory)\target'
