@@ -49,6 +49,8 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
+    continueOnError: true
+
 - task: SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
 - task: SonarQubePublish@4
