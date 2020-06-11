@@ -20,7 +20,7 @@ steps:
   inputs:
     command: 'test'
     projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
-    arguments: '--configuration test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj --collect "Code coverage"'''
+    arguments: '--collect "Code coverage"'''
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
