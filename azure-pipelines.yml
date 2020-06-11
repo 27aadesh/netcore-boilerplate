@@ -5,19 +5,31 @@ pool:
  - visualstudio
  - vstest
  - java
+variables:
+ solution: 'HappyCode.NetCoreBoilerplate.sln'
+ buildPlatform: 'Any CPU'
+ buildConfiguration: 'Release'
 
 steps:
+
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'SonarQube'
+    scannerMode: 'MSBuild'
+    projectKey: 'bayerplate'
+    projectName: 'bayerplate'
+    extraProperties: 'sonar.cs.vscoveragexml.reportsPaths=$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
   inputs:
     command: 'restore'
-    projects: 'HappyCode.NetCoreBoilerplate.sln'
+    projects: '$(solution)'
     feedsToUse: 'config'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
     command: 'build'
-    projects: 'HappyCode.NetCoreBoilerplate.sln'
+    projects: '$(solution)'
     arguments: '--output $(Build.SourcesDirectory)/target/'
 
 - task: DotNetCoreCLI@2
@@ -26,6 +38,12 @@ steps:
     command: 'test'
     projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
     arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+- task: SonarQubeAnalyze@4
+  displayName: 'Run Code Analysis'
+- task: SonarQubePublish@4
+  displayName: 'Publish Quality Gate Result'
+  inputs:
+    pollingTimeoutSec: '300'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
@@ -43,14 +61,3 @@ steps:
     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
-- task: SonarQubePrepare@4
-  inputs:
-    SonarQube: 'SonarQube'
-    scannerMode: 'MSBuild'
-    projectKey: 'bayerplate'
-    projectName: 'bayerplate'
-    extraProperties: 'sonar.cs.vscoveragexml.reportsPaths=$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
-- task: SonarQubeAnalyze@4
-- task: SonarQubePublish@4
-  inputs:
-    pollingTimeoutSec: '300'
