@@ -44,11 +44,13 @@ steps:
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
 - task: SonarQubePrepare@4
+  displayName: 'Prepare analysis on SonarQube'
   inputs:
     SonarQube: 'bayerplatesonar'
     scannerMode: 'MSBuild'
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
+  continueOnError: true  
 - task: SonarQubeAnalyze@4
 - task: SonarQubePublish@4
   inputs:
