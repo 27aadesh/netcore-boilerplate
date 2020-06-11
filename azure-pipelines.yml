@@ -18,7 +18,7 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
-    extraProperties: 'sonar.cs.vscoveragexml.reportsPaths=$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+    extraProperties: 'sonar.cs.vscoveragexml.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
   inputs:
