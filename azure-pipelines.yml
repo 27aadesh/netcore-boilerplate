@@ -19,6 +19,5 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: '**/*.csproj'
-    arguments: '--logger trx --results-directory $(Agent.TempDirectory)'
-
+    projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
+    arguments: 'paket add coverlet.msbuild --version 2.9.0'
