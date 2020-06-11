@@ -31,9 +31,15 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '--output $(Build.SourcesDirectory)/target/'
+    arguments: '--output $(Build.ArtifactStagingDirectory)'
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage report'
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+- task: CopyPublishBuildArtifacts@1
+  inputs:
+    CopyRoot: '$(Build.ArtifactStagingDirectory)'
+    Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
+    ArtifactName: 'Aadeshartifacts'
+    ArtifactType: 'Container'
