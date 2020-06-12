@@ -18,7 +18,7 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
-    extraProperties: 'sonar.flex.cobertura.reportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml'
+    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
   inputs:
@@ -37,7 +37,7 @@ steps:
   inputs:
     command: 'test'
     projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 - task: SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
 - task: SonarQubePublish@4
