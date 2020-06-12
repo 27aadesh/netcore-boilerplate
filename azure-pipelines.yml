@@ -18,6 +18,7 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
+    projectVersion: $(Build.BuildNumber)
     extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
