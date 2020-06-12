@@ -39,10 +39,6 @@ steps:
     arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 - task: SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
-- task: SonarQubePublish@4
-  displayName: 'Publish Quality Gate Result'
-  inputs:
-    pollingTimeoutSec: '300'
 - task: sonar-buildbreaker@8
   inputs:
     SonarQube: 'SonarQube'
