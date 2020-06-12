@@ -18,6 +18,7 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
+    extraProperties: 'sonar.flex.cobertura.reportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
   inputs:
