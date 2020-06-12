@@ -61,6 +61,7 @@ steps:
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
 
+jobs: 
 - deployment: VMDeploy
   displayName: web
   environment:
