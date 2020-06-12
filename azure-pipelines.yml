@@ -43,6 +43,9 @@ steps:
   displayName: 'Publish Quality Gate Result'
   inputs:
     pollingTimeoutSec: '300'
+- task: sonar-buildbreaker@8
+  inputs:
+    SonarQube: 'SonarQube'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
