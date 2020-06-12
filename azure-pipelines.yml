@@ -60,13 +60,7 @@ steps:
     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
-
-jobs: 
-- deployment: VMDeploy
-  displayName: web
-  environment:
-    name: <environment name>
-    resourceType: VirtualMachine
+    
   strategy:
       rolling:
         maxParallel: 2  #for percentages, mention as x%
