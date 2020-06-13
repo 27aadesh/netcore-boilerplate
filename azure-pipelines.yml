@@ -89,13 +89,6 @@ steps:
     PipeLineModeForWebsite: 'Integrated'
     AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
     
-    - stage: deploy_dev
-    displayName: Deploy to development
-    dependsOn:
-      - build
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    variables:
-      - group: DEV
     jobs:
     - deployment: deploy
       environment: DEV
