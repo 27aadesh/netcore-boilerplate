@@ -12,8 +12,6 @@ variables:
  buildPlatform: 'Any CPU'
  buildConfiguration: 'Release'
 
-steps:
-
 - task: SonarQubePrepare@4
   inputs:
     SonarQube: 'SonarQube'
