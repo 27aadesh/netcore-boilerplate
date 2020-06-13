@@ -73,7 +73,6 @@ $(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
     ArtifactType: 'Container'
 
 - stage: Deploy
- - jobs:
    - job: Deploy
      pool:
       name: winbayeragentpool
