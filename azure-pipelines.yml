@@ -63,3 +63,16 @@ steps:
     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'current'
+    downloadType: 'single'
+    downloadPath: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'Aadeshartifacts'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(92b7c48a-9f6c-47f6-a49b-1eb0180845b1)'
+    appType: 'webApp'
+    WebAppName: 'bayerplate'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'
