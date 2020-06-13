@@ -1,7 +1,5 @@
 stages:
  - stage: Build
- - job: build
-
 pool:
  name: winbayeragentpool
  demands:
@@ -13,8 +11,6 @@ variables:
  solution: 'HappyCode.NetCoreBoilerplate.sln'
  buildPlatform: 'Any CPU'
  buildConfiguration: 'Release'
-
-steps:
 
 - task: SonarQubePrepare@4
   inputs:
