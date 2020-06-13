@@ -15,7 +15,6 @@ variables:
 stages:
 - stage: Build
     jobs:
-    - job: Build
     pool:
     name: winbayeragentpool
     steps:
