@@ -25,25 +25,21 @@ variables:
             scannerMode: 'MSBuild'
             projectKey: 'bayerplate'
             projectName: 'bayerplate'        
-      - task: DotNetCoreCLI@2
-          displayName:  'dotnet restor1e'
-          inputs:
+       - task: DotNetCoreCLI@2
+         inputs:
             command: 'restore'
             projects: '$(solution)'
             feedsToUse: 'config'            
-      - task: DotNetCoreCLI@2
-          displayName: 'dotnet build1'
-            inputs:
+       - task: DotNetCoreCLI@2
+         inputs:
               command: 'build'
               projects: '$(solution)'
               arguments: '--output $(Build.SourcesDirectory)/target/'
       - task: DotNetCoreCLI@2
-          displayName: 'dotnet test1'
-          inputs:
+        inputs:
             command: 'test'
             projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
             arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
-            
       - task: SonarQubeAnalyze@4
         displayName: 'Run Code Analysis'
         
