@@ -9,9 +9,9 @@ variables:
  solution: 'HappyCode.NetCoreBoilerplate.sln'
  buildPlatform: 'Any CPU'
  buildConfiguration: 'Release'
- stages: 
-  - stage: Build
-    jobs:
+ stages:
+ - stage: Build
+   jobs:
     - job: Build
       pool:
         vmImage: 'windows-latest'
