@@ -69,27 +69,16 @@ $(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
-
 - stage: dev_deploy
   jobs:
   - deployment: dev_deploy
-   pool:
-   name: winbayeragentpool
-   demands:
-   - msbuild
-   - visualstudio
-   - vstest
-   - java
- variables:
-  solution: 'HappyCode.NetCoreBoilerplate.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  environment: 'dev-hello'
-  strategy:
-  runOnce:
-  deploy:
-  continueOnError: true
-  steps:
-  - script: echo "hello, dev world !!!"
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    environment: 'dev-hello'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo "hello, dev world !!!"
       
 
