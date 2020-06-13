@@ -16,11 +16,9 @@ stages:
  - stage: Build
     jobs:
     - job: Build
-      pool:
-        name: winbayeragentpool
-        
+    pool:
+    name: winbayeragentpool
     steps:
-
     - task: SonarQubePrepare@4
     inputs:
       SonarQube: 'SonarQube'
