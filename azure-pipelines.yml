@@ -15,8 +15,7 @@ variables:
 stages:
  - stage: Build
     jobs:
-    - job: Build
-    
+        
   steps:
 
   - task: SonarQubePrepare@4
