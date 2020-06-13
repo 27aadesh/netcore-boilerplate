@@ -35,21 +35,19 @@ variables:
               command: 'build'
               projects: '$(solution)'
               arguments: '--output $(Build.SourcesDirectory)/target/'
-      - task: DotNetCoreCLI@2
-        inputs:
+       - task: DotNetCoreCLI@2
+          inputs:
             command: 'test'
             projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
             arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
       - task: SonarQubeAnalyze@4
         displayName: 'Run Code Analysis'
-        
       - task: SonarQubePublish@4
         displayName: 'Publish Quality Gate Result'
-        inputs:
-          pollingTimeoutSec: '300'
-          
-      - task: sonar-buildbreaker@8
           inputs:
+            pollingTimeoutSec: '300'
+      - task: sonar-buildbreaker@8
+        inputs:
             SonarQube: 'SonarQube'
       - task: DotNetCoreCLI@2
           displayName: 'dotnet publish'
