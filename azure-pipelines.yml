@@ -13,7 +13,7 @@ variables:
  buildConfiguration: 'Release'
  stages: 
   - stage: Build
-  jobs:
+    jobs:
     - job: Build
       pool:
         vmImage: 'windows-latest'
