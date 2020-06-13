@@ -21,65 +21,65 @@ variables:
       steps:
        - task: SonarQubePrepare@4
           inputs:
-          SonarQube: 'SonarQube'
-          scannerMode: 'MSBuild'
-          projectKey: 'bayerplate'
-          projectName: 'bayerplate'
+            SonarQube: 'SonarQube'
+            scannerMode: 'MSBuild'
+            projectKey: 'bayerplate'
+            projectName: 'bayerplate'
       - task: DotNetCoreCLI@2
           displayName: 'dotnet restore'
           inputs:
-          command: 'restore'
-          projects: '$(solution)'
-          feedsToUse: 'config'
+            command: 'restore'
+            projects: '$(solution)'
+            feedsToUse: 'config'
       - task: DotNetCoreCLI@2
           displayName: 'dotnet build'
           inputs:
-          command: 'build'
-          projects: '$(solution)'
-          arguments: '--output $(Build.SourcesDirectory)/target/'
+            command: 'build'
+            projects: '$(solution)'
+            arguments: '--output $(Build.SourcesDirectory)/target/'
 
       - task: DotNetCoreCLI@2
           displayName: 'dotnet test'
           inputs:
-          command: 'test'
-          projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
-          arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+            command: 'test'
+            projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
+            arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
       - task: SonarQubeAnalyze@4
         displayName: 'Run Code Analysis'
       - task: SonarQubePublish@4
         displayName: 'Publish Quality Gate Result'
         inputs:
-        pollingTimeoutSec: '300'
+          pollingTimeoutSec: '300'
       - task: sonar-buildbreaker@8
           inputs:
-          SonarQube: 'SonarQube'
+            SonarQube: 'SonarQube'
       - task: DotNetCoreCLI@2
           displayName: 'dotnet publish'
           inputs:
-          command: 'publish'
-          publishWebProjects: true
-          arguments: '--output $(Build.ArtifactStagingDirectory)'
+            command: 'publish'
+            publishWebProjects: true
+            arguments: '--output $(Build.ArtifactStagingDirectory)'
       - task: PublishCodeCoverageResults@1
           displayName: 'Publish code coverage report'
           inputs:
-          codeCoverageTool: 'Cobertura'
-          summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+            codeCoverageTool: 'Cobertura'
+            summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
       - task: CopyPublishBuildArtifacts@1
           inputs:
-          CopyRoot: '$(Build.ArtifactStagingDirectory)'
-          Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
-          ArtifactName: 'Aadeshartifacts'
-          ArtifactType: 'Container'
+            CopyRoot: '$(Build.ArtifactStagingDirectory)'
+            Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
+            ArtifactName: 'Aadeshartifacts'
+            ArtifactType: 'Container'
       - task: DownloadBuildArtifacts@0
           inputs:
-          buildType: 'current'
-          downloadType: 'single'
-          downloadPath: '$(Build.ArtifactStagingDirectory)'
-          artifactName: 'Aadeshartifacts'
+            buildType: 'current'
+            downloadType: 'single'
+            downloadPath: '$(Build.ArtifactStagingDirectory)'
+            artifactName: 'Aadeshartifacts'
     - task: IISWebAppManagementOnMachineGroup@0
           inputs:
-          EnableIIS: true
-          IISDeploymentType: 'IISWebsite'
+            EnableIIS: true
+            IISDeploymentType: 'IISWebsite'
           ActionIISWebsite: 'CreateOrUpdateWebsite'
           WebsiteName: 'bayarnet'
           WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
