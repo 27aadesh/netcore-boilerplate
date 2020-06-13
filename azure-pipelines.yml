@@ -57,24 +57,22 @@ variables:
          inputs:
             codeCoverageTool: 'Cobertura'
             summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
-      - task: CopyPublishBuildArtifacts@1
-          inputs:
+       - task: CopyPublishBuildArtifacts@1
+         inputs:
             CopyRoot: '$(Build.ArtifactStagingDirectory)'
             Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
             ArtifactName: 'Aadeshartifacts'
             ArtifactType: 'Container'
-            
-      - task: DownloadBuildArtifacts@0
-          inputs:
+       - task: DownloadBuildArtifacts@0
+         inputs:
             buildType: 'current'
             downloadType: 'single'
             downloadPath: '$(Build.ArtifactStagingDirectory)'
-            artifactName: 'Aadeshartifacts'
-            
+            artifactName: 'Aadeshartifacts'           
     - task: IISWebAppManagementOnMachineGroup@0
-          inputs:
-            EnableIIS: true
-            IISDeploymentType: 'IISWebsite'
+      inputs:
+          EnableIIS: true
+          IISDeploymentType: 'IISWebsite'
           ActionIISWebsite: 'CreateOrUpdateWebsite'
           WebsiteName: 'bayarnet'
           WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
