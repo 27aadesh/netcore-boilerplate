@@ -37,9 +37,9 @@ variables:
               arguments: '--output $(Build.SourcesDirectory)/target/'
        - task:  DotNetCoreCLI@2
           inputs:
-            command:  'test'
+            command: 'test'
             projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
-            arguments:  '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+            arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
       - task: SonarQubeAnalyze@4
         displayName: 'Run Code Analysis'
       - task: SonarQubePublish@4
