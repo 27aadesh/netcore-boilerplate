@@ -1,3 +1,16 @@
+trigger:
+ branches:
+     include:
+         - master
+
+
+original github yaml - 
+trigger:
+ -master
+stages:
+ -stage: Build
+ - job:build
+
 pool:
  name: winbayeragentpool
  demands:
@@ -19,7 +32,9 @@ steps:
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
     projectVersion: $(Build.BuildNumber)
-    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
+    extraProperties: 'sonar.cs.opencover.reportsPaths=
+
+$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
   inputs:
@@ -37,8 +52,14 @@ steps:
   displayName: 'dotnet test'
   inputs:
     command: 'test'
-    projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+    projects: 
+
+'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoil
+
+erplate.Api.IntegrationTests.csproj'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover 
+
+/p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 - task: SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
 - task: SonarQubePublish@4
@@ -56,7 +77,9 @@ steps:
   displayName: 'Publish code coverage report'
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+    summaryFileLocation: 
+
+'$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
 - task: CopyPublishBuildArtifacts@1
   inputs:
     CopyRoot: '$(Build.ArtifactStagingDirectory)'
@@ -64,6 +87,6 @@ steps:
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
 
-
-
+-stage: Deploy
+ - job:deploy
 
