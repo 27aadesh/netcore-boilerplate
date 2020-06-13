@@ -1,5 +1,3 @@
-trigger:
- - master
 stages:
  - stage: Build
  - job: build
@@ -76,21 +74,22 @@ $(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
   jobs:
   - deployment: dev_deploy
    pool:
- name: winbayeragentpool
- demands:
- - msbuild
- - visualstudio
- - vstest
- - java
-variables:
- solution: 'HappyCode.NetCoreBoilerplate.sln'
- buildPlatform: 'Any CPU'
- buildConfiguration: 'Release'
- environment: 'dev-hello'
- strategy:
- runOnce:
- deploy:
- steps:
- - script: echo "hello, dev world !!!"
+   name: winbayeragentpool
+   demands:
+   - msbuild
+   - visualstudio
+   - vstest
+   - java
+ variables:
+  solution: 'HappyCode.NetCoreBoilerplate.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  environment: 'dev-hello'
+  strategy:
+  runOnce:
+  deploy:
+  continueOnError: true
+  steps:
+  - script: echo "hello, dev world !!!"
       
 
