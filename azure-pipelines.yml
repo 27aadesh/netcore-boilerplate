@@ -84,58 +84,55 @@ variables:
           DotNetVersionForWebsite: 'v4.0'
           PipeLineModeForWebsite: 'Integrated'
           AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
-  
- - stage: DeployStaging
-    displayName: 'Deploy to staging'
-    dependsOn: 'Build'
-    condition: succeeded()
-    jobs:
+- stage: DeployStaging
+  displayName: 'Deploy to staging'
+  dependsOn: 'Build'
+  condition: succeeded()
+  jobs:
     - deployment: DeployWeb
-    displayName: Deploy Test API
-    pool:
-    vmImage: 'windows-latest'
-    environment:
-      name: test-stg
-      resourceType: VirtualMachine
-      tags: web
+      displayName: Deploy Test API
+      pool:
+        vmImage: 'windows-latest'
+        environment:
+        name: test-stg
+        resourceType: VirtualMachine
+        tags: web
     strategy:
       runOnce:
-        deploy:
-          steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              path: '$(System.ArtifactsDirectory)'
-              artifactName: 'drop'
-
-          - task: IISWebAppManagementOnMachineGroup@0
-            displayName: 'IIS Web App Manage'
-            inputs:
-              IISDeploymentType: 'IISWebsite'
-              ActionIISWebsite: 'CreateOrUpdateWebsite'
-              WebsiteName: 'TestCloudTestDemo'
-              websitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
-              websitePhysicalPathAuth: 'WebsiteUserPassThrough'
-              AddBinding: true
-              protocol: 'http'
-              iPAddress: 'All Unassigned'
-              port: '85'
-              Bindings:
-              CreateOrUpdateAppPoolForWebsite: true
-              AppPoolNameForWebsite: 'TestCloudTestDemo'
-              ParentWebsiteNameForVD: '$(Parameters.WebsiteName)'
-              virtualPathForVD:
-              physicalPathForVD: '%SystemDrive%\inetpub\wwwroot'
-              ParentWebsiteNameForApplication: '$(Parameters.WebsiteName)'
-              VirtualPathForApplication: '$(Parameters.VirtualPathForApplication)'
-              AppPoolName: '$(Parameters.AppPoolName)'
-              appPoolNameForApplication:
-              dotNetVersionForApplication: 'v4.0'
-              pipeLineModeForApplication: 'Integrated'
-              appPoolIdentityForApplication: 'ApplicationPoolIdentity'
-
-          - task: IISWebAppDeploymentOnMachineGroup@0
-            displayName: 'IIS Web App Deploy'
-            inputs:
-              WebSiteName: 'TestCloudTestDemo'
-              package: '$(System.ArtifactsDirectory)\**\*.zip'
-              XmlVariableSubstitution: True
+      deploy:
+      steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          path: '$(System.ArtifactsDirectory)'
+          artifactName: 'drop'
+      - task: IISWebAppManagementOnMachineGroup@0
+        displayName: 'IIS Web App Manage'
+        inputs:
+           IISDeploymentType: 'IISWebsite'
+           ActionIISWebsite: 'CreateOrUpdateWebsite'
+           WebsiteName: 'TestCloudTestDemo'
+           websitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
+           websitePhysicalPathAuth: 'WebsiteUserPassThrough'
+           AddBinding: true
+           protocol: 'http'
+           iPAddress: 'All Unassigned'
+           port: '85'
+           Bindings:
+           CreateOrUpdateAppPoolForWebsite: true
+           AppPoolNameForWebsite: 'TestCloudTestDemo'
+           ParentWebsiteNameForVD: '$(Parameters.WebsiteName)'
+           virtualPathForVD:
+           physicalPathForVD: '%SystemDrive%\inetpub\wwwroot'
+           ParentWebsiteNameForApplication: '$(Parameters.WebsiteName)'
+           VirtualPathForApplication: '$(Parameters.VirtualPathForApplication)'
+           AppPoolName: '$(Parameters.AppPoolName)'
+           appPoolNameForApplication:
+           dotNetVersionForApplication: 'v4.0'
+           pipeLineModeForApplication: 'Integrated'
+           appPoolIdentityForApplication: 'ApplicationPoolIdentity'
+       - task: IISWebAppDeploymentOnMachineGroup@0
+         displayName: 'IIS Web App Deploy'
+         inputs:
+           WebSiteName: 'TestCloudTestDemo'
+           package: '$(System.ArtifactsDirectory)\**\*.zip'
+           XmlVariableSubstitution: True
