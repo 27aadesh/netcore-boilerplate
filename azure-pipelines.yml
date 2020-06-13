@@ -64,9 +64,7 @@ $(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
   displayName: 'Publish code coverage report'
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: 
-
-'$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+    summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
 - task: CopyPublishBuildArtifacts@1
   inputs:
     CopyRoot: '$(Build.ArtifactStagingDirectory)'
@@ -74,6 +72,6 @@ $(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
 
--stage: Deploy
- - job:deploy
+- stage: Deploy
+ - job: deploy
 
