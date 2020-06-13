@@ -69,13 +69,18 @@ steps:
     downloadType: 'single'
     downloadPath: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'Aadeshartifacts'
-- task: AzureRmWebAppDeployment@4
+- task: IISWebAppManagementOnMachineGroup@0
   inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Free Trial(92b7c48a-9f6c-47f6-a49b-1eb0180845b1)'
-    appType: 'webApp'
-    WebAppName: 'bayerplate'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'bayertransformation'
-    SlotName: 'production'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/HappyCode.NetCoreBoilerplate.Api.zip'
+    EnableIIS: true
+    IISDeploymentType: 'IISWebsite'
+    ActionIISWebsite: 'CreateOrUpdateWebsite'
+    WebsiteName: 'bayarnet'
+    WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
+    WebsitePhysicalPathAuth: 'WebsiteWindowsAuth'
+    WebsiteAuthUserName: 'devopsadmin'
+    WebsiteAuthUserPassword: 'Aprilmay@2020'
+    CreateOrUpdateAppPoolForWebsite: true
+    AppPoolNameForWebsite: 'bayerplateapplicationpool'
+    DotNetVersionForWebsite: 'v4.0'
+    PipeLineModeForWebsite: 'Integrated'
+    AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
