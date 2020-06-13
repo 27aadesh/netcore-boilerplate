@@ -130,7 +130,7 @@ variables:
            dotNetVersionForApplication: 'v4.0'
            pipeLineModeForApplication: 'Integrated'
            appPoolIdentityForApplication: 'ApplicationPoolIdentity'
-       - task: IISWebAppDeploymentOnMachineGroup@0
+  - task: IISWebAppDeploymentOnMachineGroup@0
          displayName: 'IIS Web App Deploy1'
          inputs:
            WebSiteName: 'TestCloudTestDemo'
