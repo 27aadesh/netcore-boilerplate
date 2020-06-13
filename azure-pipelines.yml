@@ -39,7 +39,7 @@ variables:
             arguments: '--output $(Build.SourcesDirectory)/target/'
 
       - task: DotNetCoreCLI@2
-          displayName: 'dotnet test'
+          displayName: 'dotnet test1'
           inputs:
             command: 'test'
             projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
