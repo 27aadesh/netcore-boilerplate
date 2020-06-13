@@ -35,10 +35,10 @@ variables:
             
       - task: DotNetCoreCLI@2
           displayName: 'dotnet build'
-          inputs:
-            command: 'build'
-            projects: '$(solution)'
-            arguments: '--output $(Build.SourcesDirectory)/target/'
+            inputs:
+              command: 'build'
+              projects: '$(solution)'
+              arguments: '--output $(Build.SourcesDirectory)/target/'
 
       - task: DotNetCoreCLI@2
           displayName: 'dotnet test1'
