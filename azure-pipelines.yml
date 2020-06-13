@@ -1,5 +1,3 @@
-stages:
- - stage: Build
 pool:
  name: winbayeragentpool
  demands:
@@ -61,14 +59,3 @@ variables:
     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
-- stage: dev_deploy
-  jobs:
-  - deployment: dev_deploy
-    pool:
-      vmImage: 'Ubuntu-16.04'
-      environment: 'dev-hello'
-      strategy:
-      runOnce:
-      deploy:
-      steps:
-      - script: echo "hello, dev world !!!"    
