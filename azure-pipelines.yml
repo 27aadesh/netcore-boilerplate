@@ -44,17 +44,17 @@ variables:
        - task: SonarQubePublish@4
          inputs:
             pollingTimeoutSec: '300'
-      - task: sonar-buildbreaker@8
-        inputs:
+       - task: sonar-buildbreaker@8
+         inputs:
             SonarQube: 'SonarQube'
-      - task: DotNetCoreCLI@2
-        inputs:
+       - task: DotNetCoreCLI@2
+         inputs:
             command: 'publish'
             publishWebProjects: true
             arguments: '--output $(Build.ArtifactStagingDirectory)'
-      - task: PublishCodeCoverageResults@1
-          displayName: 'Publish code coverage report'
-          inputs:
+       - task: PublishCodeCoverageResults@1
+         displayName: 'Publish code coverage report'
+         inputs:
             codeCoverageTool: 'Cobertura'
             summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
       - task: CopyPublishBuildArtifacts@1
