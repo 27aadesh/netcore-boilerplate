@@ -84,11 +84,11 @@ variables:
           DotNetVersionForWebsite: 'v4.0'
           PipeLineModeForWebsite: 'Integrated'
           AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
-- stage: DeployStaging
-  displayName: 'Deploy to staging'
-  dependsOn: 'Build'
-  condition: succeeded()
-  jobs:
+  - stage: DeployStaging
+    displayName: 'Deploy to staging'
+    dependsOn: 'Build'
+    condition: succeeded()
+    jobs:
     - deployment: DeployWeb
       displayName: Deploy Test API
       pool:
@@ -97,7 +97,7 @@ variables:
         name: test-stg
         resourceType: VirtualMachine
         tags: web
-    strategy:
+      strategy:
       runOnce:
       deploy:
       steps:
