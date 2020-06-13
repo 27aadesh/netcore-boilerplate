@@ -9,14 +9,16 @@ variables:
  solution: 'HappyCode.NetCoreBoilerplate.sln'
  buildPlatform: 'Any CPU'
  buildConfiguration: 'Release'
+
+steps:
+
 - task: SonarQubePrepare@4
   inputs:
     SonarQube: 'SonarQube'
     scannerMode: 'MSBuild'
     projectKey: 'bayerplate'
     projectName: 'bayerplate'
-    projectVersion: $(Build.BuildNumber)
-    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
+    extraProperties: 'sonar.flex.cobertura.reportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
   inputs:
@@ -29,12 +31,13 @@ variables:
     command: 'build'
     projects: '$(solution)'
     arguments: '--output $(Build.SourcesDirectory)/target/'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
     command: 'test'
     projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 - task: SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
 - task: SonarQubePublish@4
