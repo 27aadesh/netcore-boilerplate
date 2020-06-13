@@ -1,8 +1,8 @@
 trigger:
- -master
+ - master
 stages:
- -stage: Build
- - job:build
+ - stage: Build
+ - job: build
 
 pool:
  name: winbayeragentpool
