@@ -75,14 +75,13 @@ $(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
 
 - stage: Deploy
    jobs:
-   - job: Deploy
+   - deployment: Deploy
      pool:
       name: 'winbayeragentpool'
-   - task: DownloadBuildArtifacts@1
-     inputs:
-      buildType: 'current'
-      Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
-      ArtifactName: 'Aadeshartifacts'
-      ArtifactType: 'Container'
+   strategy:
+   runOnce:
+   deploy:
+   steps:
+   - script: echo "hello, dev world !!!"
       
 
