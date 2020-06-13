@@ -1,11 +1,4 @@
 trigger:
- branches:
-     include:
-         - master
-
-
-original github yaml - 
-trigger:
  -master
 stages:
  -stage: Build
