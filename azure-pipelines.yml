@@ -53,7 +53,7 @@ variables:
             publishWebProjects: true
             arguments: '--output $(Build.ArtifactStagingDirectory)'
        - task: PublishCodeCoverageResults@1
-         displayName: 'Publish code coverage report'
+         displayName: 'Publish code coverage report1'
          inputs:
             codeCoverageTool: 'Cobertura'
             summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
