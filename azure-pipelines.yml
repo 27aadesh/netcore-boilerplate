@@ -71,14 +71,19 @@ $(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
+
+
 - stage: Deploy
-- job: deploy
- steps:
+   jobs:
+   - job: Deploy
+     pool:
+      name: 'winbayeragentpool'
+   steps:
    - task: DownloadBuildArtifacts@1
      inputs:
-     buildType: 'current'
-     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
-     ArtifactName: 'Aadeshartifacts'
-     ArtifactType: 'Container'
+      buildType: 'current'
+      Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
+      ArtifactName: 'Aadeshartifacts'
+      ArtifactType: 'Container'
       
 
