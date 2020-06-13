@@ -1,3 +1,6 @@
+
+trigger:
+- master
 pool:
  name: winbayeragentpool
  demands:
@@ -11,7 +14,7 @@ variables:
  buildConfiguration: 'Release'
   
   stages:
-- stage: Build
+  - stage: Build
   jobs:
     - job: Build
       pool:
