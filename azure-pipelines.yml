@@ -1,6 +1,5 @@
 stages:
   - stage: Build
-  - job: build
 pool:
  name: winbayeragentpool
  demands:
