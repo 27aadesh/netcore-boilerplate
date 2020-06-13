@@ -75,4 +75,6 @@ steps:
     azureSubscription: 'Free Trial(92b7c48a-9f6c-47f6-a49b-1eb0180845b1)'
     appType: 'webApp'
     WebAppName: 'bayerplate'
+    deployToSlotOrASE: true
+    SlotName: 'production'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/HappyCode.NetCoreBoilerplate.Api.zip'
