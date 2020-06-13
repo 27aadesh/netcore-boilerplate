@@ -41,13 +41,12 @@ variables:
       - task: SonarQubeAnalyze@4
       - task: SonarQubePublish@4
         inputs:
-          pollingTimeoutSec: '300'
+            pollingTimeoutSec: '300'
       - task: sonar-buildbreaker@8
         inputs:
             SonarQube: 'SonarQube'
       - task: DotNetCoreCLI@2
-          displayName: 'dotnet publish'
-          inputs:
+        inputs:
             command: 'publish'
             publishWebProjects: true
             arguments: '--output $(Build.ArtifactStagingDirectory)'
