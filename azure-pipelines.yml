@@ -24,22 +24,19 @@ variables:
             SonarQube: 'SonarQube'
             scannerMode: 'MSBuild'
             projectKey: 'bayerplate'
-            projectName: 'bayerplate'
-            
+            projectName: 'bayerplate'        
       - task: DotNetCoreCLI@2
-          displayName: 'dotnet restore'
+          displayName:  'dotnet restor1e'
           inputs:
             command: 'restore'
             projects: '$(solution)'
-            feedsToUse: 'config'
-            
+            feedsToUse: 'config'            
       - task: DotNetCoreCLI@2
           displayName: 'dotnet build1'
             inputs:
               command: 'build'
               projects: '$(solution)'
               arguments: '--output $(Build.SourcesDirectory)/target/'
-
       - task: DotNetCoreCLI@2
           displayName: 'dotnet test1'
           inputs:
