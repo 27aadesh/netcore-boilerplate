@@ -131,7 +131,7 @@ variables:
            pipeLineModeForApplication: 'Integrated'
            appPoolIdentityForApplication: 'ApplicationPoolIdentity'
        - task: IISWebAppDeploymentOnMachineGroup@0
-         displayName: 'IIS Web App Deploy'
+         displayName: 'IIS Web App Deploy1'
          inputs:
            WebSiteName: 'TestCloudTestDemo'
            package: '$(System.ArtifactsDirectory)\**\*.zip'
