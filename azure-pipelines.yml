@@ -11,7 +11,6 @@ variables:
  solution: 'HappyCode.NetCoreBoilerplate.sln'
  buildPlatform: 'Any CPU'
  buildConfiguration: 'Release'
-
 - task: SonarQubePrepare@4
   inputs:
     SonarQube: 'SonarQube'
@@ -32,7 +31,6 @@ variables:
     command: 'build'
     projects: '$(solution)'
     arguments: '--output $(Build.SourcesDirectory)/target/'
-
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
@@ -73,6 +71,4 @@ variables:
       runOnce:
       deploy:
       steps:
-      - script: echo "hello, dev world !!!"
-      
-
+      - script: echo "hello, dev world !!!"    
