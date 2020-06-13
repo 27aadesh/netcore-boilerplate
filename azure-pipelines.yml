@@ -34,7 +34,7 @@ variables:
             feedsToUse: 'config'
             
       - task: DotNetCoreCLI@2
-          displayName: 'dotnet build'
+          displayName: 'dotnet build1'
             inputs:
               command: 'build'
               projects: '$(solution)'
