@@ -38,8 +38,10 @@ variables:
             command: 'test'
             projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
             arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
-      - task: SonarQubeAnalyze@4
-      - task: SonarQubePublish@4
+       - task: SonarQubeAnalyze@4
+          inputs:
+            pollingTimeoutSec: '30'
+       - task: SonarQubePublish@4
         inputs:
             pollingTimeoutSec: '300'
       - task: sonar-buildbreaker@8
