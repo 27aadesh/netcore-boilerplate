@@ -70,11 +70,11 @@ $(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml'
   - deployment: dev_deploy
     pool:
       vmImage: 'Ubuntu-16.04'
-    environment: 'dev-hello'
-    strategy:
+      environment: 'dev-hello'
+      strategy:
       runOnce:
-        deploy:
-          steps:
-          - script: echo "hello, dev world !!!"
+      deploy:
+      steps:
+      - script: echo "hello, dev world !!!"
       
 
