@@ -14,7 +14,6 @@ variables:
   
 stages:
 - stage: Build
-    steps:
     - task: SonarQubePrepare@4
     inputs:
       SonarQube: 'SonarQube'
