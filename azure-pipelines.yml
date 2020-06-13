@@ -16,23 +16,23 @@ stages:
  - stage: Build
     jobs:
         
-  steps:
+    steps:
 
-  - task: SonarQubePrepare@4
-  inputs:
-    SonarQube: 'SonarQube'
-    scannerMode: 'MSBuild'
-    projectKey: 'bayerplate'
-    projectName: 'bayerplate'
-  - task: DotNetCoreCLI@2
-  displayName: 'dotnet restore'
-  inputs:
+    - task: SonarQubePrepare@4
+    inputs:
+      SonarQube: 'SonarQube'
+      scannerMode: 'MSBuild'
+      projectKey: 'bayerplate'
+      projectName: 'bayerplate'
+    - task: DotNetCoreCLI@2
+    displayName: 'dotnet restore'
+    inputs:
     command: 'restore'
     projects: '$(solution)'
     feedsToUse: 'config'
-  - task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
-  inputs:
+    - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
     command: 'build'
     projects: '$(solution)'
     arguments: '--output $(Build.SourcesDirectory)/target/'
