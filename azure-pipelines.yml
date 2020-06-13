@@ -1,5 +1,5 @@
 stages:
-  - stage:  Build
+  - stage: Build
   - job: build
 pool:
  name: winbayeragentpool
@@ -65,9 +65,10 @@ steps:
     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
+    
   - stage: deploy
     jobs:
-  - deployment: qa_deploy
+  - deployment: 'qa_deploy'
   pool:
   vmImage: 'Ubuntu-16.04'
   environment: 'qa-hello'
