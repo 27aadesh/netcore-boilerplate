@@ -106,7 +106,7 @@ variables:
           path: '$(System.ArtifactsDirectory)'
           artifactName: 'drop'
       - task: IISWebAppManagementOnMachineGroup@0
-        displayName: 'IIS Web App Manage'
+        displayName: 'IIS Web App Manage1'
         inputs:
            IISDeploymentType: 'IISWebsite'
            ActionIISWebsite: 'CreateOrUpdateWebsite'
