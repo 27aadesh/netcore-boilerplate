@@ -65,15 +65,4 @@ steps:
     Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
     ArtifactName: 'Aadeshartifacts'
     ArtifactType: 'Container'
-    
-  - stage: deploy
-    jobs:
-  - deployment: 'qa_deploy'
-    pool:
-    vmImage: 'Ubuntu-16.04'
-    environment: 'qa-hello'
-    strategy:
-    runOnce:
-    deploy:
-    steps:
-    - script: echo "hello, qa world !!!"
+ 
