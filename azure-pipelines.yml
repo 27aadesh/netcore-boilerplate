@@ -16,9 +16,7 @@ stages:
  - stage: Build
     jobs:
     - job: Build
-      pool:
-        vmImage: 'windows-latest'
-
+    
   steps:
 
   - task: SonarQubePrepare@4
