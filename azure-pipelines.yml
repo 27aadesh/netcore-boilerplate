@@ -12,8 +12,8 @@ variables:
  buildPlatform: 'Any CPU'
  buildConfiguration: 'Release'
   
-  stages:
-  - stage: Build
+stages:
+ - stage: Build
   jobs:
     - job: Build
       pool:
@@ -94,7 +94,7 @@ variables:
     PipeLineModeForWebsite: 'Integrated'
     AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
   
-- stage: DeployStaging
+ - stage: DeployStaging
   displayName: 'Deploy to staging'
   dependsOn: 'Build'
   condition: succeeded()
