@@ -20,17 +20,19 @@ variables:
 
       steps:
        - task: SonarQubePrepare@4
-          inputs:
+         inputs:
             SonarQube: 'SonarQube'
             scannerMode: 'MSBuild'
             projectKey: 'bayerplate'
             projectName: 'bayerplate'
+            
       - task: DotNetCoreCLI@2
           displayName: 'dotnet restore'
           inputs:
             command: 'restore'
             projects: '$(solution)'
             feedsToUse: 'config'
+            
       - task: DotNetCoreCLI@2
           displayName: 'dotnet build'
           inputs:
@@ -44,12 +46,15 @@ variables:
             command: 'test'
             projects: 'test/HappyCode.NetCoreBoilerplate.Api.IntegrationTests/HappyCode.NetCoreBoilerplate.Api.IntegrationTests.csproj'
             arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+            
       - task: SonarQubeAnalyze@4
         displayName: 'Run Code Analysis'
+        
       - task: SonarQubePublish@4
         displayName: 'Publish Quality Gate Result'
         inputs:
           pollingTimeoutSec: '300'
+          
       - task: sonar-buildbreaker@8
           inputs:
             SonarQube: 'SonarQube'
@@ -70,12 +75,14 @@ variables:
             Contents: 'HappyCode.NetCoreBoilerplate.Api.zip'
             ArtifactName: 'Aadeshartifacts'
             ArtifactType: 'Container'
+            
       - task: DownloadBuildArtifacts@0
           inputs:
             buildType: 'current'
             downloadType: 'single'
             downloadPath: '$(Build.ArtifactStagingDirectory)'
             artifactName: 'Aadeshartifacts'
+            
     - task: IISWebAppManagementOnMachineGroup@0
           inputs:
             EnableIIS: true
