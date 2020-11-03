@@ -14,7 +14,7 @@ variables:
    jobs:
     - job: Build
       pool:
-        vmImage: 'windows-latest'
+        vmImage: '$vm_image'
 
       steps:
        - task: SonarQubePrepare@4
